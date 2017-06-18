@@ -39,7 +39,7 @@ Ext.define('common.controller.DataSource', {
 									.query("#datasource_form")[0].form;
 							btn.disable();
 							datasource_form.submit({
-										url : APP_ROOT+'/common/datasources/',
+										url : APP_ROOT+'/common/datasources',
 										method : 'POST',
 										waitMsg : "save is running",
 										success : function(form, action) {
@@ -70,7 +70,7 @@ Ext.define('common.controller.DataSource', {
 									});
 							btn.disable();
 							datasource_form.submit({
-										url : APP_ROOT+'/common/datasources/',
+										url : APP_ROOT+'/common/datasources',
 										method : 'DELETE',
 										waitMsg : "delete is running",
 										success : function(form, action) {
@@ -100,7 +100,7 @@ Ext.define('common.controller.DataSource', {
 							data = datasource_form.getValues();
 							btn.disable();
 							datasource_form.submit({
-										url : APP_ROOT+'/common/datasources/',
+										url : APP_ROOT+'/common/datasources',
 										method : 'PUT',
 										waitMsg : "test is running",
 										success : function(form, action) {

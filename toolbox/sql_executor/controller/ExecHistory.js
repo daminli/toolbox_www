@@ -40,7 +40,7 @@ Ext.define('sql_executor.controller.ExecHistory', {
 				'itemdblclick' : function(grid, record, item, index, e, eOpts) {
 
 					var vrTabpanel = Ext.ComponentQuery
-							.query("#ExecHistoryTabpanel")[0];
+							.query("tabpanel")[0];
 					if (vrTabpanel.items.length > 1) {
 						var tab = Ext.getCmp('ViewRunLog');
 						vrTabpanel.remove(tab);

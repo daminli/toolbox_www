@@ -41,7 +41,7 @@ Ext.define('sql_executor.controller.RunScript', {
 					}
 					btn.disable();
 					script_form.submit({
-								url : APP_ROOT+'/sql_executor/run_script/?exec_id='
+								url : APP_ROOT+'/sql_executor/run_script?exec_id='
 										+ run_script.exec_id,
 								method : 'POST',
 								waitMsg:"scripts is running",  
@@ -86,7 +86,7 @@ Ext.define('sql_executor.controller.RunScript', {
 						return;
 					}
 					script_form.submit({
-								url : APP_ROOT+'/sql_executor/run_script_block/?exec_id='
+								url : APP_ROOT+'/sql_executor/run_script_block?exec_id='
 										+ run_script.exec_id,
 								method : 'POST',
 								waitMsg:"scripts is running",  

@@ -27,7 +27,7 @@ Ext.define('common.store.DataSource', {
             model: 'common.model.DataSource',
             proxy: {
                 type: 'ajax',
-                url: APP_ROOT+'/common/datasources/',
+                url: APP_ROOT+'/common/datasources',
                 reader: {
                     type: 'json',
                     rootProperty: 'datasources'

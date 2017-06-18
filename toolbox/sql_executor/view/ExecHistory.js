@@ -8,14 +8,20 @@ Ext.define('sql_executor.view.ExecHistory', {
 
 		Ext.applyIf(me, {
 			items : [ {
-				xtype : 'SearchExecHistory'
+				xtype : 'tabpanel',
+				frame : false,
+				activeTab : 0,
+				height : '100%',
+				autoHeight : true,
+				autoScroll : true,
+				defaults : {
+					height : 700
+				},
+				items : [ {
+					xtype : 'SearchExecHistory'
+				} ]
 			}
-			/*
-			 * ,{ xtype : 'tabpanel', frame : false, activeTab : 0, id :
-			 * 'ExecHistoryTabpanel', height : '100%', autoHeight : true,
-			 * autoScroll : true, defaults : { height : 700 }, items : [{ xtype :
-			 * 'SearchExecHistory' }] }
-			 */
+
 			]
 		});
 		me.callParent(arguments);

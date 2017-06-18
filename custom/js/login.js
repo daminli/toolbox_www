@@ -1,12 +1,12 @@
 $(function() {
 	/**
-	 * jquery方法：addClass() addClass() 方法向被选元素添加一个或多个类。该方法不会移除已存在的 class
-	 * 属性，仅仅添加一个或多个 class 属性。 如需添加多个类，请使用空格分隔类名。
+	 * jquery鏂规硶锛歛ddClass() addClass() 鏂规硶鍚戣閫夊厓绱犳坊鍔犱竴涓垨澶氫釜绫汇�傝鏂规硶涓嶄細绉婚櫎宸插瓨鍦ㄧ殑 class
+	 * 灞炴�э紝浠呬粎娣诲姞涓�涓垨澶氫釜 class 灞炴�с�� 濡傞渶娣诲姞澶氫釜绫伙紝璇蜂娇鐢ㄧ┖鏍煎垎闅旂被鍚嶃��
 	 */
 	$("#login").addClass("current");
 
 	/**
-	 * 正则检验邮箱 email 传入邮箱 return true 表示验证通过
+	 * 姝ｅ垯妫�楠岄偖绠� email 浼犲叆閭 return true 琛ㄧず楠岃瘉閫氳繃
 	 */
 	function check_email(email) {
 		if (/^[\w\-\.]+@[\w\-]+(\.[a-zA-Z]{2,4}){1,2}$/.test(email)) {
@@ -15,10 +15,10 @@ $(function() {
 	}
 
 	/**
-	 * input 按键事件keyup
+	 * input 鎸夐敭浜嬩欢keyup
 	 */
 	$("input[name]").keyup(function(e) {
-		// 禁止输入空格 把空格替换掉(空格的ASCII为32)
+		// 绂佹杈撳叆绌烘牸 鎶婄┖鏍兼浛鎹㈡帀(绌烘牸鐨凙SCII涓�32)
 		if ($(this).attr('name') == "password" && e.keyCode == 32) {
 			$(this).val(function(i, v) {
 				return $.trim(v);
@@ -31,11 +31,11 @@ $(function() {
 		}
 	});
 
-	// 错误信息
+	// 閿欒淇℃伅
 	var succ_arr = [];
 
 	/**
-	 * input失去焦点事件focusout 这跟blur事件区别在于，他可以在父元素上检测子元素失去焦点的情况。
+	 * input澶卞幓鐒︾偣浜嬩欢focusout 杩欒窡blur浜嬩欢鍖哄埆鍦ㄤ簬锛屼粬鍙互鍦ㄧ埗鍏冪礌涓婃娴嬪瓙鍏冪礌澶卞幓鐒︾偣鐨勬儏鍐点��
 	 */
 	$("input[name]").focusout(function(e) {
 		var msg = "";
@@ -60,10 +60,10 @@ $(function() {
 	});
 
 	/**
-	 * Ajax用户注册
+	 * Ajax鐢ㄦ埛娉ㄥ唽
 	 */
 	$("button[type='button']").click(function() {
-		$("input[name]").focusout(); // 让所有的input标记失去一次焦点来设置msg信息
+		$("input[name]").focusout(); // 璁╂墍鏈夌殑input鏍囪澶卞幓涓�娆＄劍鐐规潵璁剧疆msg淇℃伅
 		for (x in succ_arr) {
 			if (succ_arr[x] == false)
 				return;
@@ -72,11 +72,11 @@ $(function() {
 		$("span[name='error_message']").eq(0).css({
 						display : 'block'
 					}).text('');
-		var data = $('#login').serialize(); // 序列化表单元素
+		var data = $('#login').serialize(); // 搴忓垪鍖栬〃鍗曞厓绱�
 
 		$.ajax({
 			type: 'POST',
-			url : "/toolbox/auth/valid_login",
+			url : "/auth/valid_login",
 			data : data,
 			success : function(result) {
 				if (result.success) {
@@ -98,7 +98,7 @@ $(function() {
 		});
 
 		/**
-		 * 有兴趣的可以到这里 自行发送Ajax请求 实现注册功能
+		 * 鏈夊叴瓒ｇ殑鍙互鍒拌繖閲� 鑷鍙戦�丄jax璇锋眰 瀹炵幇娉ㄥ唽鍔熻兘
 		 */
 	});
 

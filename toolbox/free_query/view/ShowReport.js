@@ -13,16 +13,20 @@ Ext.define('free_query.view.ShowReport', {
 				columns = json.columns;
 
 				me.req_filter = json.req_filter;
-
-				Ext.define('report_model', {
-					extend : 'Ext.data.Model',
-					fields : json.fields
-				});
-
+				
+				if(!Ext.ClassManager.get('free_query.model.'+me.report_id))
+				{
+					Ext.define('free_query.model.'+me.report_id, {
+					    extend: 'Ext.data.Model',
+					    fields : json.fields,
+					    schema: {namespace:'free_query.model'}
+					    });
+				}
+				
 				// create the Data Store
 				var store = Ext.create('Ext.data.Store', {
-					//pageSize : 200,
-					model : 'report_model',
+					// pageSize : 200,
+					model : 'free_query.model.'+me.report_id,
 					remoteSort : true,
 					proxy : {
 						type : 'ajax',
@@ -30,7 +34,7 @@ Ext.define('free_query.view.ShowReport', {
 						timeout : 600000,
 						reader : {
 							type : 'json',
-							root : 'data',
+							rootProperty : 'data',
 							totalProperty : 'total_count'
 						},
 						// sends single sort as multi parameter
@@ -40,7 +44,7 @@ Ext.define('free_query.view.ShowReport', {
 				});
 				store.on("beforeload", function(storeObj, operation, eOpts) {
 					Ext.apply(storeObj.proxy.extraParams, storeObj.filter_params);
-					//alert(Ext.JSON.encode(storeObj.filter_params));
+					// alert(Ext.JSON.encode(storeObj.filter_params));
 					return true;
 				});
 				me.report_store = store;
@@ -75,26 +79,12 @@ Ext.define('free_query.view.ShowReport', {
 								}
 							}
 						}, '-',
-						/*{
-						 xtype : 'button',
-						 text : 'Hilight',
-						 glyph : 61675,
-						 listeners : {
-						 click : {
-						 fn : me.onHilight,
-						 scope : me
-						 }
-						 }
-						 }, '-', {
-						 text : 'Chart',
-						 glyph : 61568,
-						 listeners : {
-						 click : {
-						 fn : me.onChart,
-						 scope : me
-						 }
-						 }
-						 }, */'-', {
+						/*
+						 * { xtype : 'button', text : 'Hilight', glyph : 61675,
+						 * listeners : { click : { fn : me.onHilight, scope : me } } },
+						 * '-', { text : 'Chart', glyph : 61568, listeners : {
+						 * click : { fn : me.onChart, scope : me } } },
+						 */'-', {
 							glyph : 61465,
 							text : 'Export',
 							listeners : {
@@ -107,15 +97,12 @@ Ext.define('free_query.view.ShowReport', {
 					},
 					// paging bar on the bottom
 					/*
-					 bbar : Ext.create('Ext.PagingToolbar', {
-					 store : store,
-					 displayInfo : true,
-					 displayMsg : 'Displaying record {0} - {1} of {2}',
-					 emptyMsg : "No data to display"
-					 })
+					 * bbar : Ext.create('Ext.PagingToolbar', { store : store,
+					 * displayInfo : true, displayMsg : 'Displaying record {0} -
+					 * {1} of {2}', emptyMsg : "No data to display" })
 					 */
-					bbar : Ext.create('Ext.ux.StatusBar', {
-						//id : 'result-statusbar',
+					bbar : Ext.create('Ext.ux.statusbar.StatusBar', {
+						// id : 'result-statusbar',
 						defaultText : 'Search Result'
 					})
 				}));
@@ -133,12 +120,12 @@ Ext.define('free_query.view.ShowReport', {
 								var sb = me.query("statusbar")[0];
 								if (me.report_store.totalCount < 200) {
 									sb.setStatus({
-										text : me.report_store.totalCount + ' rows return！',
+										text : me.report_store.totalCount + ' rows return锛�',
 										iconCls : 'x-status-valid'
 									});
 								} else {
 									sb.setStatus({
-										text : 'Warning! Only ' + me.report_store.totalCount + ' rows return！',
+										text : 'Warning! Only ' + me.report_store.totalCount + ' rows return锛�',
 										iconCls : 'x-status-error'
 									});
 								}
@@ -167,12 +154,12 @@ Ext.define('free_query.view.ShowReport', {
 					var sb = me.query("statusbar")[0];
 					if (me.report_store.totalCount < 200) {
 						sb.setStatus({
-							text : me.report_store.totalCount + ' rows return！',
+							text : me.report_store.totalCount + ' rows return锛�',
 							iconCls : 'x-status-valid'
 						});
 					} else {
 						sb.setStatus({
-							text : 'Warning! Only ' + me.report_store.totalCount + ' rows return！',
+							text : 'Warning! Only ' + me.report_store.totalCount + ' rows return锛�',
 							iconCls : 'x-status-error'
 						});
 					}
@@ -244,7 +231,7 @@ Ext.define('free_query.view.ShowReport', {
 				Ext.MessageBox.hide();
 				json = Ext.JSON.decode(response.responseText);
 				Dg.common.msg('Data Export Finished ', 'report ' + me.title + ' data export successful');
-				window.location.href = '/free_query/download_report/' + json.data.url;
+				window.location.href = STATIC_ROOT+'/' + json.data.url;
 			},
 			failure : function() {
 				clearInterval(me.interval);
@@ -264,9 +251,7 @@ Ext.define('free_query.view.ShowReport', {
 
 		me.interval = setInterval(f((new Date())), 1000);
 		/*
-		 setTimeout(function() {
-		 clearInterval(me.interval);
-		 }, 500 * 100);
+		 * setTimeout(function() { clearInterval(me.interval); }, 500 * 100);
 		 */
 	},
 	onHilight : function(btn, e, eOpts) {

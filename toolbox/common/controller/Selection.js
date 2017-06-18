@@ -27,7 +27,7 @@ Ext.define('common.controller.Selection', {
 							btn.disable();
 							
 							Ext.Ajax.request( {
-								  url : APP_ROOT+'/common/selections/',
+								  url : APP_ROOT+'/common/selections',
 								  method : 'post',
 								  params : selection_form.getValues(),
 								  success : function(response, options) {
@@ -50,7 +50,7 @@ Ext.define('common.controller.Selection', {
 							btn.disable();
 							
 							Ext.Ajax.request( {
-								  url : APP_ROOT+'/common/selections/',
+								  url : APP_ROOT+'/common/selections',
 								  method : 'delete',
 								  params : selection_form.getValues(),
 								  success : function(response, options) {

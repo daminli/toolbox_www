@@ -14,26 +14,26 @@
  * Do NOT hand edit this file.
  */
 
-Ext.define('free_query.controller.ViewReport', {
-	extend : 'Ext.app.Controller',
-
-	models : ['Folder', 'Reports'],
-	stores : ['Navigation', 'Reports', 'FolderTree', 'Folder'],
+	Ext.define('free_query.controller.ViewReport', {
+		extend : 'Ext.app.Controller',
+	
+		models : ['Folder', 'Reports'],
+		stores : [ 'Reports', 'FolderTree', 'Folder'],
 	views : ['ViewReport', 'SearchReport', 'ShowReport', 'ReportForm',
 			'FolderForm'],
 	requires : [ 'Ext.ux.TreePicker'],
 
 	onFolderSelect : function(dataview, record, item, index, e, eOpts) {
-		me.folder_id = record.raw.id;
+		me.folder_id = record.data.id;
 		this.getStore("Reports").load({
 					params : {
-						folder_id : record.raw.id
+						folder_id : record.data.id
 					},
 					scope : this
 				});
 		this.getStore("Folder").load({
 			params : {
-				folder_id : record.raw.id
+				folder_id : record.data.id
 			},
 			scope : this,
 			callback : function(records, operation, success) {
@@ -53,6 +53,7 @@ Ext.define('free_query.controller.ViewReport', {
 								folder_id : 1
 							}]
 				});
+		btnSave = Ext.ComponentQuery.query('folderform button[text=Save]')[0];
 	},
 	reloadFolder : function(response, opts) {
 		Ext.ComponentQuery.query("#NavigationPanel")[0].store.load();
@@ -84,8 +85,8 @@ Ext.define('free_query.controller.ViewReport', {
 					var vrTabpanel = Ext.ComponentQuery
 							.query("#viewReportTabpanel")[0];
 					var newPage = Ext.create("free_query.view.ShowReport", {
-								title : record.raw.display_name,
-								report_id : record.raw.id,
+								title : record.data.display_name,
+								report_id : record.data.id,
 								closable : true,
 								autoScroll : true,
 								frame : true,

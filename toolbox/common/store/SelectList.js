@@ -25,7 +25,7 @@ Ext.define('common.store.SelectList', {
 							model : 'common.model.SelectList',
 							proxy : {
 								type : 'ajax',
-								url : APP_ROOT+'/common/selectlist/',
+								url : APP_ROOT+'/common/selectlist',
 								reader : {
 									type : 'json',
 									rootProperty: 'selectlist'

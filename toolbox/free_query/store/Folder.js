@@ -27,7 +27,8 @@ Ext.define('free_query.store.Folder', {
 								type : 'ajax',
 								url : APP_ROOT+'/free_query/get_folder',
 								reader : {
-									type : 'json'
+									type : 'json',
+									rootProperty:'data'
 								}
 							}
 						}, cfg)]);

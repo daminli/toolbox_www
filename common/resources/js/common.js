@@ -7,7 +7,7 @@ STATIC_ROOT = 'http://' + window.location.host + '/static';
 // CF_ROOT = 'cf:http://' + window.location.host;
 CF_ROOT = '';
 
-Ext.Loader.setPath('Ext.ux', STATIC_ROOT + '/ux');
+Ext.Loader.setPath('Ext.ux', STATIC_ROOT + '/libs/ux6.2');
 Ext.Ajax.timeout = 1800000;
 //Ext.Loader.setPath('common', STATIC_ROOT + '/toolbox/common/app');
 
@@ -95,10 +95,6 @@ Ext.getUrlParam = function(param) {
 
 };
 
-/*
- * alert(navigator.appCodeName); alert(navigator.appName);
- * alert(navigator.appVersion);
- */
 
 Ext.ns('Dg');
 
@@ -106,11 +102,6 @@ Dg.common = function(){
     var msgCt;
 
     function createBox(t, s){
-       // return ['<div class="msg">',
-       //         '<div class="x-box-tl"><div class="x-box-tr"><div class="x-box-tc"></div></div></div>',
-       //         '<div class="x-box-ml"><div class="x-box-mr"><div class="x-box-mc"><h3>', t, '</h3>', s, '</div></div></div>',
-       //         '<div class="x-box-bl"><div class="x-box-br"><div class="x-box-bc"></div></div></div>',
-       //         '</div>'].join('');
        return '<div class="msg"><h3>' + t + '</h3><p>' + s + '</p></div>';
     }
     return {
@@ -130,59 +121,8 @@ Dg.common = function(){
                 // later that could interfere with the HtmlEditor and reset its iFrame.
                 msgCt = Ext.DomHelper.insertFirst(document.body, {id:'msg-div'}, true);
             }
-//            var t = Ext.get('exttheme');
-//            if(!t){ // run locally?
-//                return;
-//            }
-//            var theme = Cookies.get('exttheme') || 'aero';
-//            if(theme){
-//                t.dom.value = theme;
-//                Ext.getBody().addClass('x-'+theme);
-//            }
-//            t.on('change', function(){
-//                Cookies.set('exttheme', t.getValue());
-//                setTimeout(function(){
-//                    window.location.reload();
-//                }, 250);
-//            });
-//
-//            var lb = Ext.get('lib-bar');
-//            if(lb){
-//                lb.show();
-//            }
         }
     };
 }();
 
- //鑾峰彇鍓垏鏉挎暟鎹� 鍑芥暟
-    function getClipboard() {
-        if (window.clipboardData) {
-            return (window.clipboardData.getData('Text'));
-        }
-        else if (window.netscape) {
-            netscape.security.PrivilegeManager.enablePrivilege('UniversalXPConnect');
-            var clip = Components.classes['@mozilla.org/widget/clipboard;1'].createInstance(Components.interfaces.nsIClipboard);
-            if (!clip) return;
-            var trans = Components.classes['@mozilla.org/widget/transferable;1'].createInstance(Components.interfaces.nsITransferable);
-            if (!trans) return;
-            trans.addDataFlavor('text/unicode');
-            clip.getData(trans, clip.kGlobalClipboard);
-            var str = new Object();
-            var len = new Object();
-            try {
-                trans.getTransferData('text/unicode', str, len);
-            }
-            catch (error) {
-                return null;
-            }
-            if (str) {
-                if (Components.interfaces.nsISupportsWString) str = str.value.QueryInterface(Components.interfaces.nsISupportsWString);
-                else if (Components.interfaces.nsISupportsString) str = str.value.QueryInterface(Components.interfaces.nsISupportsString);
-                else str = null;
-            }
-            if (str) {
-                return (str.data.substring(0, len.value / 2));
-            }
-        }
-        return null;
-    }
+ 

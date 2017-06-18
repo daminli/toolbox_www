@@ -56,7 +56,7 @@ Ext.define('sql_executor.view.ExecuteSql', {
 								if (!request_form.isValid())
 									return;
 								request_form.submit({
-									url : APP_ROOT+'/sql_executor/new_request/',
+									url : APP_ROOT+'/sql_executor/new_request',
 									method : 'POST',
 									success : function(form, action) {
 										run_script = me

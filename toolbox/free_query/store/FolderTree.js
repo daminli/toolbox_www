@@ -21,7 +21,7 @@ Ext.define('free_query.store.FolderTree', {
 				cfg = cfg || {};
 				me.callParent([Ext.apply({
 							storeId : 'FolderTree',
-							//autoLoad : true,
+							//autoLoad : false,
 							//autoSync : true,
 							root : {
 								id : '0',
@@ -32,6 +32,7 @@ Ext.define('free_query.store.FolderTree', {
 								url : APP_ROOT+'/free_query/report_folder',
 								reader : {
 									type : 'json'
+									//root:'data'
 								}
 							}
 						}, cfg)]);

@@ -30,7 +30,8 @@ Ext.define('free_query.store.Reports', {
                 type: 'ajax',
                 url: APP_ROOT+'/free_query/search_report',
                 reader: {
-                    type: 'json'
+                    type: 'json',
+                    rootProperty:'data'
                 }
             }
         }, cfg)]);

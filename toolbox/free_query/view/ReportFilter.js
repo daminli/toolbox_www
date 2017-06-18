@@ -18,7 +18,7 @@ Ext.define('free_query.view.ReportFilter', {
 			url : APP_ROOT+"/free_query/report_filter?id=" + me.report_id,
 			success : function(response, config) {
 				json = Ext.JSON.decode(response.responseText);
-				filterFields = json;
+				filterFields = json.filter_form;
 				Ext.define('list_model', {
 					extend : 'Ext.data.Model',
 					fields : [{
@@ -128,13 +128,13 @@ Ext.define('free_query.view.ReportFilter', {
 					if(me.report_store.totalCount<200)
 					{
                         sb.setStatus({
-                            text: me.report_store.totalCount + ' rows return！',
+                            text: me.report_store.totalCount + ' rows return锛�',
                             iconCls: 'x-status-valid'
                         });
 					}
 					else{
 						sb.setStatus({
-                            text: 'Warning! Only ' +me.report_store.totalCount + ' rows return！',
+                            text: 'Warning! Only ' +me.report_store.totalCount + ' rows return锛�',
                             iconCls: 'x-status-error'
                         });
 					}

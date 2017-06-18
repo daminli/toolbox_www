@@ -64,7 +64,7 @@ Ext.define('sql_executor.view.RunScript', {
 													}],
 											proxy : {
 												type : 'ajax',
-												url : APP_ROOT+"/common/datasources/?ds_group=sql_executor",
+												url : APP_ROOT+"/common/datasources?ds_group=sql_executor",
 												reader : {
 													type : 'json',
 													rootProperty:'datasources'

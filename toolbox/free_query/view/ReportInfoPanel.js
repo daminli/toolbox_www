@@ -73,9 +73,10 @@ Ext.define('free_query.view.ReportInfoPanel', {
 														}],
 												proxy : {
 													type : 'ajax',
-													url : APP_ROOT+"/common/get_data_source?ds_group=normal",
+													url : APP_ROOT+"/common/datasources?ds_group=normal",
 													reader : {
-														type : 'json'
+														type : 'json',
+														rootProperty:'datasources'
 													}
 												}
 											}),

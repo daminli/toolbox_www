@@ -4,6 +4,7 @@ Ext.define('free_query.view.SearchReport', {
 	layout : {
 		type : 'border'
 	},
+	bodyPadding : 3,
 	title : 'Search Report',
 	initComponent : function() {
 		var me = this;
@@ -57,7 +58,9 @@ Ext.define('free_query.view.SearchReport', {
 										}, {
 											xtype : 'panel',
 											region : 'south',
-											height : 350,
+											height : 500,
+											collapsible: 'bottom',
+											collapsed:true,
 											id:'infopanel',
 											layout : {
 												type : 'card'
@@ -66,13 +69,11 @@ Ext.define('free_query.view.SearchReport', {
 											{
 														xtype : 'folderform',
 														id : 'ReportFolderForm',
-														bodyPadding : 10,
-														title : 'Folder Info'
+														bodyPadding : 10
 													},{
 														xtype : 'reportform',
 														id : 'ReportInfoForm',
-														bodyPadding : 10,
-														title : 'Report Info'
+														bodyPadding : 10
 													}
 											]
 										}]
