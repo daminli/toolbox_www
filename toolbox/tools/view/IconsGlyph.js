@@ -36,23 +36,25 @@ Ext.define('tools.view.IconsGlyph', {
 						font_code : temp_icon.font_code,
 						icon_class : temp_icon.icon_class,
 						tooltip : 'icon_class : ' + temp_icon.icon_class + '\nfont_code : ' + temp_icon.font_code + '\nfont_code(10) : ' + parseInt(temp_icon.font_code, 16),
-						tooltipType:  'title'
+						tooltipType:  'title',
+						handler:me.show_code
 					});
+					temp.setStyle('color', 'red');
 					icon_panel.add(temp);
 				}
 				me.add(icon_panel);
 				Ext.QuickTips.init();
 			}
 		});
+		
+		me.show_code = function(btn, e, eOpts) {
+
+			Ext.Msg.alert('Icon Info', 'icon_class : ' + btn.icon_class + '<br/> font_code :' + btn.font_code + '<br/> font_code(10) : ' + parseInt(btn.font_code, 16));
+		}
+		
 		Ext.applyIf(me);
 		me.callParent(arguments);
-
 		//Ext.applyIf(me);
 
-	},
-
-	show_code : function(btn, e, eOpts) {
-
-		Ext.Msg.alert('Icon Info', 'icon_class : ' + btn.icon_class + '<br/> font_code :' + btn.font_code + '<br/> font_code(10) : ' + parseInt(btn.font_code, 16));
 	}
 });

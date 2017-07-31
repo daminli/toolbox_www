@@ -12,7 +12,7 @@ if(result.data.length>1)
 	  var i=0;
 	  for(title in result.data[1])
 	  {
-	    render.push(){name:"Col"+i});
+	    render.push({name:"Col"+i});
 	    i++;
 	  }
 	  

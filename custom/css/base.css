@@ -1,0 +1,5 @@
+.grid-success-col:before {
+    font: 18px/1 FontAwesome;
+    color: #81cb31;
+    content: "\f058";
+}

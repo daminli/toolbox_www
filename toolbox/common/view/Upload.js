@@ -7,7 +7,7 @@ Ext.define('common.view.Upload', {
 		// me.application.getController(me.controllers);
 
 		Ext.applyIf(me, {
-			items : [ Ext.create('common.view.UploadForm', {template:'Test.Excel.Template'}) ]
+			items : [ Ext.create('common.view.UploadForm', {template:'upload.user_activity'}) ]
 		});
 
 		me.callParent(arguments);
